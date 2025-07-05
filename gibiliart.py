@@ -20,7 +20,8 @@ app = Flask(__name__)
 TASKS = {}
 print("🔧 Loading model...")
 base_model = "stabilityai/stable-diffusion-2-1-base"
-lora_path = "./studioghibli-redmond-2-1v-studio-ghibli-lora-for-freedom-redmond-sd-2-1.safetensors"  # Update with your LoRA path
+lora_path = 'artificialguybr/studioghibli-redmond-2-1v-studio-ghibli-lora-for-freedom-redmond-sd-2-1';
+weight_name='StudioGhibliRedmond21V-FreedomRedmond-StudioGhibli-StdGBRedmAF.safetensors';
 # Set up scheduler
 scheduler = EulerDiscreteScheduler.from_pretrained(
     base_model,
@@ -34,7 +35,7 @@ pipe = StableDiffusionXLPipeline.from_pretrained(
     use_safetensors=True
 )
 
-pipe.load_lora_weights(lora_path)
+pipe.load_lora_weights(lora_path,weight_name=weight_name)
 pipe.fuse_lora()
 if(sys.argv[4] == "gpu"):
     pipe.to("cuda")
@@ -60,7 +61,7 @@ def generate_image_task(prompt, task_id):
           try:
               for i in range(2):  # Iterates from 0 to 4
                 # Create prompt
-                full_prompt = f"{word}, stickers, simple, <lora:StickersRedmond:1> "
+                full_prompt = f"{word}, StdGBRedmAF, Studio Ghibli "
                 negative_prompt = "ugly, disfigured, duplicate, mutated, bad art, blur, blurry, dof, background, multiple objects, two object, incomplete, unfinished"
                 image = pipe(prompt=full_prompt, negative_prompt=negative_prompt, num_inference_steps=35, guidance_scale=7, strength=1).images[0]
                 output = remove(image)
