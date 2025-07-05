@@ -22,12 +22,20 @@ TASKS = {}
 print("🔧 Loading model...")
 base_model = "../base_model.safetensors"
 lora_path = '../lora.safetensors';
-# Set up scheduler
-pipe = AutoPipelineForText2Image.from_pretrained(
+scheduler = EulerDiscreteScheduler.from_pretrained(
     base_model,
-    torch_dtype=torch.float16
+    subfolder="scheduler"
 )
+pipe = StableDiffusionXLPipeline.from_pretrained(
+    base_model,
+    scheduler=scheduler,
+    torch_dtype=torch.float16,
+    variant="fp16",
+    use_safetensors=True
+)
+
 pipe.load_lora_weights(lora_path)
+pipe.fuse_lora()
 if(sys.argv[4] == "gpu"):
     pipe.to("cuda")
 
