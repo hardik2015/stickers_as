@@ -20,15 +20,14 @@ if len(sys.argv) < 5:
 app = Flask(__name__)
 TASKS = {}
 print("🔧 Loading model...")
-base_model = "stabilityai/stable-diffusion-2-1-base"
-lora_path = 'artificialguybr/studioghibli-redmond-2-1v-studio-ghibli-lora-for-freedom-redmond-sd-2-1';
-weight_name='StudioGhibliRedmond21V-FreedomRedmond-StudioGhibli-StdGBRedmAF.safetensors';
+base_model = "../base_model.safetensors"
+lora_path = '../lora.safetensors';
 # Set up scheduler
 pipe = AutoPipelineForText2Image.from_pretrained(
     base_model,
     torch_dtype=torch.float16
 )
-pipe.load_lora_weights(lora_path,weight_name=weight_name)
+pipe.load_lora_weights(lora_path)
 if(sys.argv[4] == "gpu"):
     pipe.to("cuda")
 
