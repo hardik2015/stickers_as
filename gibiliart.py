@@ -26,13 +26,9 @@ weight_name='StudioGhibliRedmond21V-FreedomRedmond-StudioGhibli-StdGBRedmAF.safe
 # Set up scheduler
 pipe = AutoPipelineForText2Image.from_pretrained(
     base_model,
-    torch_dtype=torch.float16,
-    variant="fp16",
-    use_safetensors=True
+    torch_dtype=torch.float16
 )
-
 pipe.load_lora_weights(lora_path,weight_name=weight_name)
-pipe.fuse_lora()
 if(sys.argv[4] == "gpu"):
     pipe.to("cuda")
 
