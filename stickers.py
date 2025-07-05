@@ -23,20 +23,12 @@ print("🔧 Loading model...")
 base_model = "stabilityai/stable-diffusion-xl-base-1.0"
 lora_path = "./StickersRedmond.safetensors"  # Update with your LoRA path
 
-if(sys.argv[4] == "gpu"):
-  pipe = StableDiffusionXLPipeline.from_pretrained(
-      base_model,
-      torch_dtype=torch.float16,
-      variant="fp16",
-      use_safetensors=True
-  ).to("cuda")
-else:
-  pipe = StableDiffusionXLPipeline.from_pretrained(
-      base_model,
-      torch_dtype=torch.float16,
-      variant="fp16",
-      use_safetensors=True
-  )
+pipe = StableDiffusionXLPipeline.from_pretrained(
+  base_model,
+  torch_dtype=torch.float16,
+  variant="fp16",
+  use_safetensors=True
+)
 
 pipe.load_lora_weights(lora_path)
 pipe.fuse_lora()
