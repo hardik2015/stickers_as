@@ -10,6 +10,7 @@ import io
 import requests
 from requests.auth import HTTPBasicAuth
 import gc
+import sys
 from rembg import remove
 
 
