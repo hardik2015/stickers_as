@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from diffusers import EulerDiscreteScheduler, StableDiffusionXLPipeline
+from diffusers import EulerDiscreteScheduler, AutoPipelineForText2Image
 from diffusers.loaders import AttnProcsLayers
 from PIL import Image
 import threading
