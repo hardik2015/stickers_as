@@ -21,7 +21,7 @@ app = Flask(__name__)
 TASKS = {}
 print("🔧 Loading model...")
 base_model = "stabilityai/stable-diffusion-xl-base-1.0"
-lora_path = "./sticker-lora-dev.safetensors"  # Update with your LoRA path
+lora_path = "./StickersRedmond.safetensors"  # Update with your LoRA path
 
 if(sys.argv[4] == "gpu"):
   pipe = StableDiffusionXLPipeline.from_pretrained(
