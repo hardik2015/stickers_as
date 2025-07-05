@@ -1,4 +1,4 @@
-from Flask import Flask, request, jsonify
+from flask import Flask, request, jsonify
 from diffusers import EulerDiscreteScheduler, StableDiffusionXLPipeline
 from diffusers.loaders import AttnProcsLayers
 from PIL import Image
@@ -19,8 +19,8 @@ if len(sys.argv) < 5:
 app = Flask(__name__)
 TASKS = {}
 print("🔧 Loading model...")
-base_model = "stabilityai/stable-diffusion-xl-base-1.0"
-lora_path = "./sticker-lora-dev.safetensors"  # Update with your LoRA path
+base_model = "artificialguybr/freedom"
+lora_path = "./StickersRedmond21V-FreedomRedmond-Sticker-Stickers.safetensors"  # Update with your LoRA path
 # Set up scheduler
 scheduler = EulerDiscreteScheduler.from_pretrained(
     base_model,
