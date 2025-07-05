@@ -24,13 +24,8 @@ base_model = "stabilityai/stable-diffusion-2-1-base"
 lora_path = 'artificialguybr/studioghibli-redmond-2-1v-studio-ghibli-lora-for-freedom-redmond-sd-2-1';
 weight_name='StudioGhibliRedmond21V-FreedomRedmond-StudioGhibli-StdGBRedmAF.safetensors';
 # Set up scheduler
-scheduler = EulerDiscreteScheduler.from_pretrained(
-    base_model,
-    subfolder="scheduler"
-)
 pipe = AutoPipelineForText2Image.from_pretrained(
     base_model,
-    scheduler=scheduler,
     torch_dtype=torch.float16,
     variant="fp16",
     use_safetensors=True
