@@ -28,7 +28,7 @@ scheduler = EulerDiscreteScheduler.from_pretrained(
     base_model,
     subfolder="scheduler"
 )
-pipe = StableDiffusionXLPipeline.from_pretrained(
+pipe = AutoPipelineForText2Image.from_pretrained(
     base_model,
     scheduler=scheduler,
     torch_dtype=torch.float16,
