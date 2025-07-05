@@ -20,20 +20,23 @@ if len(sys.argv) < 5:
 app = Flask(__name__)
 TASKS = {}
 print("🔧 Loading model...")
-base_model = "artificialguybr/freedom"
-lora_path = "./StickersRedmond21V-FreedomRedmond-Sticker-Stickers.safetensors"  # Update with your LoRA path
-# Set up scheduler
-scheduler = EulerDiscreteScheduler.from_pretrained(
-    base_model,
-    subfolder="scheduler"
-)
-pipe = StableDiffusionXLPipeline.from_pretrained(
-    base_model,
-    scheduler=scheduler,
-    torch_dtype=torch.float16,
-    variant="fp16",
-    use_safetensors=True
-)
+base_model = "stabilityai/stable-diffusion-xl-base-1.0"
+lora_path = "./sticker-lora-dev.safetensors"  # Update with your LoRA path
+
+if(sys.argv[4] == "gpu"):
+  pipe = StableDiffusionXLPipeline.from_pretrained(
+      base_model,
+      torch_dtype=torch.float16,
+      variant="fp16",
+      use_safetensors=True
+  ).to("cuda")
+else:
+  pipe = StableDiffusionXLPipeline.from_pretrained(
+      base_model,
+      torch_dtype=torch.float16,
+      variant="fp16",
+      use_safetensors=True
+  )
 
 pipe.load_lora_weights(lora_path)
 pipe.fuse_lora()
