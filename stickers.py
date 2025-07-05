@@ -57,7 +57,7 @@ def generate_image_task(prompt, task_id):
               for i in range(2):  # Iterates from 0 to 4
                 # Create prompt
                 full_prompt = f"{word}, stickers, simple, <lora:StickersRedmond:1> "
-                negative_prompt = "ugly, disfigured, duplicate, mutated, bad art, blur, blurry, dof, background, multiple objects, two object, incomplete, unfinished"
+                negative_prompt = "ugly, disfigured, duplicate, mutated, bad art, blur, blurry, dof, background"
                 image = pipe(prompt=full_prompt, negative_prompt=negative_prompt, num_inference_steps=35, guidance_scale=7, strength=1).images[0]
                 output = remove(image)
                 # Save image to bytes
