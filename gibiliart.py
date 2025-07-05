@@ -1,4 +1,4 @@
-from Flask import Flask, request, jsonify
+from flask import Flask, request, jsonify
 from diffusers import EulerDiscreteScheduler, StableDiffusionXLPipeline
 from diffusers.loaders import AttnProcsLayers
 from PIL import Image
